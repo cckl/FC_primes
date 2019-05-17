@@ -9,31 +9,33 @@ class MultiplicationTable:
     def create_primes_table(self, n):
         """Create a 2D array of n primes and their products."""
 
-        # validate n
         if n == 0:
             print('You\'ve selected 0 primes. Here is a nonexistent table.')
+            return '0 primes'
         if not isinstance(n, int) or n < 0:
-            print('Sorry, that\'s not a valid number of primes.')
-            print('Please try again with an integer greater than 0.')
-        else:
-            # generate first row of table of n primes
-            n_primes = get_n_primes(n)
-            self.table.append(n_primes)
+            raise ValueError('Sorry, that\'s not a valid number of primes. Please try again with an integer greater than 0.')
 
-            for i in range(1, len(n_primes)):
-                row = []
-                row.append(n_primes[i])
-                for j in range(1, len(n_primes)):
-                    product = int(n_primes[i]) * int(n_primes[j])
-                    row.append(str(product))
-                self.table.append(row)
+        n_primes = get_n_primes(n)
+        self.table.append(n_primes)
 
-    def print_primes_table(self, n):
-        """Print the multiplication table to stdout."""
+        for i in range(1, len(n_primes)):
+            row = []
+            row.append(n_primes[i])
+            for j in range(1, len(n_primes)):
+                row.append(n_primes[i] * n_primes[j])
+            self.table.append(row)
 
-        primes_table = self.create_primes_table(n)
+    def format_primes_table(self, n):
+        """Create a formatted string representation of the primes table."""
+
+        self.create_primes_table(n)
+        primes_table_string = ''
+
         for row in self.table:
-            print('\t'.join(row))
+            for i in range(len(row)):
+                primes_table_string = f"{primes_table_string}{str(row[i])}\t"
+            primes_table_string += '\n'
+        return primes_table_string
 
 
 def is_prime(num):
@@ -54,7 +56,7 @@ def get_n_primes(n):
     num = 2
     while len(primes) < n + 1:
         if is_prime(num):
-            primes.append(str(num))
+            primes.append(num)
         num += 1
     return primes
 
@@ -66,6 +68,7 @@ if __name__ == '__main__':
     print('Try it with another value of n as well.\n')
     print('* * * * * * * * * *\n')
 
-    n = 8
+    n = 10
     table = MultiplicationTable()
-    table.print_primes_table(n)
+    result = table.format_primes_table(n)
+    print(result)
