@@ -8,7 +8,7 @@ Suggested installation for OSX with Homebrew:
 `brew install python3`
 
 # Instructions
-Run the program in the terminal and see the multiplication table of the first 10 prime numbers printed to stdout:
+Run the program in the terminal to print the multiplication table of the first 10 prime numbers:
 `python3 primes.py`
 
 Run the test file:
@@ -25,24 +25,38 @@ I took an object-oriented approach to writing the program. `primes.py` consists 
 * `format_primes_table`: creates a string representation of the 2D array with proper tab and newline spacing so the printed output is easily readable.
 
 The class methods of MultiplicationTable utilize two standalone functions:
-* `get_n_primes`: creates an array of the first N primes numbers, ensuring it begins with an empty space ' '.
+* `get_n_primes`: creates an array of the first N primes numbers, ensuring it begins with an empty space for the top left of the table.
 * `is_prime`: a helper function that validates prime numbers.
 
 # Testing
-I used Python’s `unittest` testing framework as it is included in the Python standard library, and has a readily available suite of tools. 
+I used Python’s `unittest` testing framework because it is included in the Python standard library, and has a readily available suite of tools. 
 
 When writing unit tests, I considered:
 * Testing proper handling of invalid input for N
 * Testing that the first row and column of the table were properly populated
-* Testing that the products of primes were correct
-* Testing that my string representation contained tabulation and newline characters in the correct positions
-* Testing that my prime number functions validated and generated the correct prime numbers
+* Testing the correct products of primes
+* Testing my string representation for tabulation and newline characters in the correct positions
+* Testing my prime number functions for validation and generation of the correct prime numbers
 
-When designing my program, I considered how to structure it in a way that would make unit testing easy. This is why I decided to abstract the actual printing of the table from my class methods, and simply print it under `__main__`. That way, I have the `format_primes_table` class method that return a string I could then unit test in detail for correct values and formatting.
+When designing my program, I considered how to structure it in a way that would make unit testing easy. This is why I decided to abstract the actual printing of the table from my class methods, and simply print it under `__main__`. That way, I have the `format_primes_table` class method return a string I can unit test in detail for correct values and formatting.
 
-# Runtime Complexity
+# Aysymptotic Complexity
+## Time
+Examples of the actual runtime of the program are as follows:
+N = 10 `0.0004780292510986328`
+N = 100 `0.0356907844543457`
+N = 500 `29.098557949066162`
 
-* `get_n_primes` and `is_prime`: The runtime of these functions are both O(N), where N = the number of primes. The space complexity is also O(N), as N grows with the input size of N prime numbers.
-* `create_primes_table_` and `format_primes_table`: Due to the nested for...in loops in both functions, the runtime of these functions are each O(N^2), where N = the number of primes. 
+* `get_n_primes` and `is_prime`: The runtime of these functions are both O(N), where N = the number of primes. O(N) + O(N)
+* `create_primes_table_` and `format_primes_table`: Due to the nested for...in loops in both functions, the runtime of these functions are each O(N^2), where N = the number of primes; O(N^2) + O(N^2).
 
-The overall runtime of the program is O(N^2)
+The overall runtime complexity of the program is 2N + 2(N^2). After ignoring lower order terms and dropping leading constants, the runtime complexity is **O(N^2)**.
+
+## Space
+* `get_n_primes`: The space complexity of this function is O(N), where N = the number of primes.
+*  `is_prime`: The space complexity is O(1), as it holds no additional data structures.
+* `create_primes_table_` and `format_primes_table`: Due to self.table being 2D array, the space complexity is O(N^2).
+
+After ignoring lower order terms and dropping leading constants, the space complexity is **O(N^2)**.
+
+Overall, as the size of N grows, the program scales in quadratic time. This results in significantly slower speeds with very large numbers for N
