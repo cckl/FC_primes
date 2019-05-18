@@ -25,7 +25,7 @@ I took an object-oriented approach to writing the program. `primes.py` consists 
 * `format_primes_table`: creates a string representation of the 2D array with proper tab and newline spacing so the printed output is easily readable.
 
 The class methods of MultiplicationTable utilize two standalone functions:
-* `get_n_primes`: creates an array of the first N primes numbers, ensuring it begins with an empty space for the top left of the table.
+* `get_n_primes`: creates an array of the first N prime numbers, ensuring it begins with an empty space for the top left corner of the table.
 * `is_prime`: a helper function that validates prime numbers.
 
 # Testing
@@ -38,7 +38,7 @@ When writing unit tests, I considered:
 * Testing my string representation for tabulation and newline characters in the correct positions
 * Testing my prime number functions for validation and generation of the correct prime numbers
 
-When designing my program, I considered how to structure it in a way that would make unit testing easy. This is why I decided to abstract the actual printing of the table from my class methods, and simply print it under `__main__`. That way, I have the `format_primes_table` class method return a string I can unit test in detail for correct values and formatting.
+When designing my program, I considered how to structure it in a way that would make unit testing easy. This is why I decided to abstract the actual printing of the table from my class methods, and simply print it under `__main__`.  The `format_primes_table` class method returns a string that I can unit test in detail for correct values and formatting.
 
 # Aysymptotic Complexity
 ## Time
@@ -47,7 +47,7 @@ N = 10 `0.0004780292510986328`
 N = 100 `0.0356907844543457`
 N = 500 `29.098557949066162`
 
-* `get_n_primes` and `is_prime`: The runtime of these functions are both O(N), where N = the number of primes. O(N) + O(N)
+* `get_n_primes` and `is_prime`: The runtime of these functions are both O(N), where N = the number of primes; O(N) + O(N).
 * `create_primes_table_` and `format_primes_table`: Due to the nested for...in loops in both functions, the runtime of these functions are each O(N^2), where N = the number of primes; O(N^2) + O(N^2).
 
 The overall runtime complexity of the program is 2N + 2(N^2). After ignoring lower order terms and dropping leading constants, the runtime complexity is **O(N^2)**.
@@ -55,8 +55,8 @@ The overall runtime complexity of the program is 2N + 2(N^2). After ignoring low
 ## Space
 * `get_n_primes`: The space complexity of this function is O(N), where N = the number of primes.
 *  `is_prime`: The space complexity is O(1), as it holds no additional data structures.
-* `create_primes_table_` and `format_primes_table`: Due to self.table being 2D array, the space complexity is O(N^2).
+* `create_primes_table_` and `format_primes_table`: Due to self.table being a 2D array, the space complexity is O(N^2).
 
 After ignoring lower order terms and dropping leading constants, the space complexity is **O(N^2)**.
 
-Overall, as the size of N grows, the program scales in quadratic time. This results in significantly slower speeds with very large numbers for N
+Overall, as the size of N grows, the program scales in quadratic time and space.
