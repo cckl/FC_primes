@@ -42,7 +42,7 @@ When designing my program, I considered how to structure it in a way that would 
 
 # Aysymptotic Complexity
 ## Time
-Examples of the actual runtime of the program are as follows:
+Examples of the actual runtime of the program are as follows:  
 N = 10 `0.0004780292510986328`  
 N = 100 `0.0356907844543457`  
 N = 500 `29.098557949066162`  
