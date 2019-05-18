@@ -43,9 +43,9 @@ When designing my program, I considered how to structure it in a way that would 
 # Aysymptotic Complexity
 ## Time
 Examples of the actual runtime of the program are as follows:  
-N = 10 `0.0004780292510986328`  
-N = 100 `0.0356907844543457`  
-N = 500 `29.098557949066162`  
+N = 10 `0.0004780292510986328s`  
+N = 100 `0.0356907844543457s`  
+N = 500 `29.098557949066162s`  
 
 * `get_n_primes` and `is_prime`: The runtime of these functions are both O(N), where N = the number of primes; O(N) + O(N).
 * `create_primes_table_` and `format_primes_table`: Due to the nested for...in loops in both functions, the runtime of these functions are each O(N^2), where N = the number of primes; O(N^2) + O(N^2).
